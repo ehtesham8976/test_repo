@@ -7,16 +7,6 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
-            steps {
-                echo '========================================'
-                echo 'Checking out source code'
-                echo '========================================'
-
-                checkout scm
-            }
-        }
-
         stage('Check Vivado') {
             steps {
                 sh '''
@@ -24,14 +14,14 @@ pipeline {
                         source "${VIVADO_HOME}/settings64.sh"
 
                         echo "========================================"
-                        echo "Vivado Version"
+                        echo "Vivado"
                         echo "========================================"
 
                         vivado -version
 
                         echo ""
                         echo "========================================"
-                        echo "XSim Version"
+                        echo "XSim"
                         echo "========================================"
 
                         xsim -version
@@ -48,7 +38,7 @@ pipeline {
 
                         echo ""
                         echo "========================================"
-                        echo "Starting Vivado Simulation"
+                        echo "STARTING VIVADO SIMULATION"
                         echo "========================================"
 
                         vivado \
@@ -57,7 +47,7 @@ pipeline {
 
                         echo ""
                         echo "========================================"
-                        echo "Simulation command completed"
+                        echo "SIMULATION COMMAND FINISHED"
                         echo "========================================"
                     '
                 '''
@@ -67,15 +57,15 @@ pipeline {
 
     post {
         success {
-            echo '========================================'
-            echo '       SIMULATION SUCCESS'
-            echo '========================================'
+            echo "========================================"
+            echo "       SIMULATION SUCCESS"
+            echo "========================================"
         }
 
         failure {
-            echo '========================================'
-            echo '       SIMULATION FAILED'
-            echo '========================================'
+            echo "========================================"
+            echo "       SIMULATION FAILED"
+            echo "========================================"
         }
     }
 }
